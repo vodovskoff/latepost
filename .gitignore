@@ -3,3 +3,5 @@
 .vscode
 /Client/dist/
 /Client/node_modules/
+/Server/.composer.cache/
+/Client/_cacache/
