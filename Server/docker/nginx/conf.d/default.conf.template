@@ -26,6 +26,7 @@ server {
         fastcgi_param HTTPS $NGINX_HTTPS;
 
         internal;
+        
     }
 
     location ~ \.php$ {
