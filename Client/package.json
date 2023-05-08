@@ -13,14 +13,20 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
     "babel-loader": "^8.0.2",
+    "bootstrap": "^5.2.3",
     "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.3",
     "html-webpack-plugin": "^5.5.1",
     "mini-css-extract-plugin": "^2.7.5",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",
     "redux": "^4.2.1",
+    "resolve-url-loader": "^5.0.0",
+    "sass-loader": "^13.2.2",
+    "style-loader": "^3.3.2",
     "webpack": "^5.82.0",
     "webpack-dev-server": "^4.13.3"
   },
@@ -37,6 +43,7 @@
     "@babel/preset-typescript": "^7.21.5",
     "@babel/runtime": "^7.17.9",
     "babel-loader": "^8.2.5",
+    "sass": "^1.62.1",
     "webpack-cli": "^5.0.2"
   }
 }

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import s from './Page.module.scss';
 
 export default function Page({children, pageTitle = ''}) {
     return (
-            <div>
+            <div classname={s.Page}>
                 <header>
                 </header>
 
-                <main>
+                <main className={s.main}>
                     {children}
                 </main>
 

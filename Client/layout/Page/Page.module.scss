@@ -2,6 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: lightgreen;
 
   header {
     flex: none;
@@ -9,12 +10,13 @@
     z-index: 125;
   }
 
-  main {
-    margin-top: 64px;
-    flex: 1 0 auto;
-  }
-
   footer {
     flex: none;
   }
+}
+
+.main {
+  margin-top: 64px;
+  flex: 1 0 auto;
+  display: -webkit-inline-flex;
 }

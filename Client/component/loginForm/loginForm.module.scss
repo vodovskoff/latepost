@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  border-radius: 5px;
+  margin: 10px;
+  height: 100%;
+}
+
+.sidebar {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 20px;
+  width: 300px;
+  border-radius: 5px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.loginFormH2 {
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+
+.lable {
+  margin-bottom: 10px;
+}
+
+.loginFormInput {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+}
+
+.loginFormButton {
+  background-color: #fff;
+  color: #4CAF50;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.loginFormButton:hover {
+  background-color: gray;
+  color: #fff;
+}
+
+.loginFormA {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Стили для контента */
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
