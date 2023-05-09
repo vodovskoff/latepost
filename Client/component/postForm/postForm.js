@@ -27,32 +27,32 @@ export default function LoginForm() {
                 </div>
               </div>
               <div class="form-group row">
-                <label for="isEncrypted" class="col-sm-2 col-xl-12 col-form-label">Зашифровать</label>
-                <div class="col-sm-10">
+                <label for="isEncrypted" class="col-sm-10 col-md-10 col-xl-10 col-form-label">Зашифровать</label>
+                <div class="align-self-center col-sm-2 col-md-2 col-xl-2">
                   <input type="checkbox" class="form-check-input" id="isEncrypted" name="isEncrypted"></input>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="isAnonymous" class="col-sm-2 col-xl-12 col-form-label">Не указывать автора</label>
-                <div class="col-sm-10">
+                <label for="isAnonymous" class="align-self-center col-sm-10 col-md-10 col-xl-10 col-form-label">Не указывать автора</label>
+                <div class="col-sm-2 col-md-2">
                   <input type="checkbox" class="form-check-input" id="isAnonymous" name="isAnonymous"></input>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="publicationDate" class="col-sm-2 col-xl-12 col-form-label">Дата публикации</label>
+                <label for="publicationDate" class="col-sm-2 col-xl-10 col-form-label">Дата публикации</label>
                 <div class="col-sm-12">
                   <input type="datetime-local" class="form-control" id="publicationDate" name="publicationDate"></input>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="isReachableById" class="col-sm-2 col-xl-11 col-form-label">Отображать по порядковому номеру</label>
-                <div class="col-sm-10">
+                <label for="isReachableById" class="col-sm-2 col-md-10 col-xl-10 col-form-label">Отображать по порядковому номеру</label>
+                <div class="align-self-center col-sm-10 col-md-2 col-xl-2">
                   <input type="checkbox" class="form-check-input" id="isReachableById" name="isReachableById"></input>
                 </div>
               </div>
               <button type="submit" className={ls.loginFormButton}>Создать</button>
             </form>
-                          </div>
-                          </div>
+              </div>
+            </div>
             );
 }
