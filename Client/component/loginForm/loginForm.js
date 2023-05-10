@@ -1,19 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import s from './loginForm.module.scss'
 import axios from "axios";
+import {registrationSlice} from '../../store/slices/registrationSlice'
+import {loginSlce, loginSlice} from '../../store/slices/loginSlice'
 
 export default function LoginForm() {
 
-    const onSubmitLogin = e => {
-        console.log(100)
-    };
-
-    const onSubmitRegister = e => {
-        console.log(333)
-    };
-
-    function registration() {
-
+    const getDataForLoginOrRegister = ()=> {
         const usernameInput = document.getElementById("username")
         const passwordInput = document.getElementById("password")
 
@@ -22,29 +15,24 @@ export default function LoginForm() {
 
         usernameInput.value = ""
         passwordInput.value = ""
+
         let data = new Object()
         data.username = username
         data.password = password
-
-        return axios({
-            method: 'post',
-            url: 'api' + '/registration',
-            data: data
-        })
-            .then(res => {
-                return {data: res.data}
-            })
-            .catch(err => {
-                if (err.response.data.status===409) {
-                    const errorBox = document.getElementById("error_box")
-                    errorBox.innerText = "Пользователь уже зарегистрирован"
-                }
-                return {error: err.response.data}
-            });
-
-
+        return data;
     }
 
+    function onRegistration() {
+        const errorBox = document.getElementById("error_box")
+        let data = getDataForLoginOrRegister();
+        return registrationSlice(data, errorBox)
+    }
+
+    function onLogin() {
+        const errorBox = document.getElementById("error_box")
+        let data = getDataForLoginOrRegister();
+        return loginSlice(data, errorBox)
+    }
 
     return(
             <div className={s.wrapper}>
@@ -55,8 +43,8 @@ export default function LoginForm() {
                         <input className={s.loginFormInput} type="text" id="username" name="username"></input>
                             <label htmlFor="password">Пароль:</label>
                         <input className={s.loginFormInput} type="password" id="password" name="password"></input>
-                        <button onClick={onSubmitLogin} className={s.loginFormButton} type="button">Войти</button>
-                        <button onClick={registration} className={s.loginFormButton} type="button">Зарегистрироваться</button>
+                        <button onClick={onLogin} className={s.loginFormButton} type="button">Войти</button>
+                        <button onClick={onRegistration} className={s.loginFormButton} type="button">Зарегистрироваться</button>
                     </form>
                     <p id="error_box"></p>
                 </div>

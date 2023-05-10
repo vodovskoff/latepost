@@ -1,16 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import CONFIG from "../config";
+import axios from "axios";
 
-const registration = (data) => {
+export const registrationSlice = (data, errorBox) => {
     return axios({
-        method: 'POST',
+        method: 'post',
         url: 'api' + '/registration',
         data: data
     })
         .then(res => {
+            errorBox.innerText = "Вы успешно зарегистрировались"
             return {data: res.data}
         })
         .catch(err => {
+            if (err.response.data.status===409) {
+                errorBox.innerText = "Пользователь уже зарегистрирован"
+            }
             return {error: err.response.data}
         });
 }
