@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ls from '../loginForm/loginForm.module.scss';
 
-export default function PostCard() {
+export default function PostCard(props) {
     return(
         <div className={ls.wrapper}>
             <div className={ls.sidebar}>
@@ -15,7 +15,7 @@ export default function PostCard() {
                     </div>
                     <div class="form-group">
                         <label for="mainText">Main Text:</label>
-                        <textarea class="form-control" id="mainText" rows="5">Главный текст</textarea>
+                        <textarea class="form-control" id="mainText" rows="5">{props.post ? props.post.mainText : "loading"}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="descriptionText">Description Text:</label>

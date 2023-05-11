@@ -2,8 +2,42 @@ import React, {useEffect, useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import s from './postForm.module.scss';
 import ls from '../loginForm/loginForm.module.scss';
+import {registrationSlice} from "../../store/slices/registrationSlice";
+import {createPostSlice} from "../../store/slices/createPostSlice";
 
-export default function LoginForm() {
+
+
+export default function PostForm() {
+
+  const getDataForCreatePost = ()=> {
+
+    const customIdInput = document.getElementById("customId")
+    const mainText = document.getElementById("mainText")
+    const descriptionTextInput = document.getElementById("descriptionText")
+    const isEncryptedInput = document.getElementById("isEncrypted")
+    const isAnonymousInput = document.getElementById("isAnonymous")
+    const publicationDateInput = document.getElementById("publicationDate")
+    const isReachableByIdInput = document.getElementById("isReachableById")
+
+    let data = new Object()
+    data.customId = customIdInput.value==="" ? null : customIdInput.value
+    data.mainText = mainText.value
+    data.descriptionText = descriptionTextInput.value
+    data.isEncrypted = isEncryptedInput.checked
+    data.isAnonymous = isAnonymousInput.checked
+    data.publicationDate = publicationDateInput.value
+    data.isReachableById = isReachableByIdInput.checked
+
+    return data;
+  }
+
+
+  function onCreatePost() {
+    const errorBox = document.getElementById("error_box")
+    errorBox.innerText = ""
+    let data = getDataForCreatePost();
+    return createPostSlice(data, errorBox)
+  }
             return(
             <div className={ls.wrapper}>
               <div className={ls.sidebar}>
@@ -50,7 +84,8 @@ export default function LoginForm() {
                   <input type="checkbox" class="form-check-input" id="isReachableById" name="isReachableById"></input>
                 </div>
               </div>
-              <button type="submit" className={ls.loginFormButton}>Создать</button>
+              <button type="button" onClick={onCreatePost} className={ls.loginFormButton}>Создать</button>
+                <p id="error_box"></p>
             </form>
               </div>
             </div>

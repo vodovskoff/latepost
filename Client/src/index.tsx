@@ -7,8 +7,9 @@ import {
     Route
 } from "react-router-dom";
 import {Provider} from 'react-redux';
-import MainPage from "../pages/MainPage";
+import MainPage from "../component/MainPage";
 import {store} from "../store";
+
 const App = () => {
     return (
         <Provider store={store}>
