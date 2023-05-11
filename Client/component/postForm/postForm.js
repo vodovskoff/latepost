@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import s from './postForm.module.scss';
 import ls from '../loginForm/loginForm.module.scss';
 import {registrationSlice} from "../../store/slices/registrationSlice";
-import {createPostSlice} from "../../store/slices/createPostSlice";
+import {createOrUpdatePostSlice} from "../../store/slices/createOrUpdatePostSlice";
 import moment from "moment/moment";
 import {post} from "axios";
 
@@ -53,11 +53,12 @@ export default function PostForm(props) {
     return mom.format("YYYY-MM-DDTkk:mm")
   }
 
-  function onCreatePost() {
+  function onCreateOrUpdatePost() {
     const errorBox = document.getElementById(elementIdByPostId("error_box"))
     errorBox.innerText = ""
-    let data = getDataForCreatePost();
-    return createPostSlice(data, errorBox)
+    let data = getDataForCreatePost()
+    let method = props.post ? "update" : "post"
+    return createOrUpdatePostSlice(data, errorBox, method)
   }
             return(
             <div id={props.post ? "postForm"+props.post.id : ""} className={ls.wrapper}>
@@ -106,7 +107,7 @@ export default function PostForm(props) {
                   <input type="hidden" id={elementIdByPostId("postId")} value={props.post ? props.post.id : ""}></input>
                 </div>
               </div>
-              <button type="button" onClick={onCreatePost} className={ls.loginFormButton}>{props.post ? "Редактировать" : "Создать"}</button>
+              <button type="button" onClick={onCreateOrUpdatePost} className={ls.loginFormButton}>{props.post ? "Редактировать" : "Создать"}</button>
                 <p id={elementIdByPostId("error_box")}></p>
             </form>
               </div>

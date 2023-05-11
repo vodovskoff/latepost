@@ -71,7 +71,7 @@ class PostController extends ApiController
         }
     }
 
-    #[Route('/', name: 'create_post', methods: ['POST'])]
+    #[Route('/', name: 'update_post', methods: ['UPDATE'])]
     public function update(Request $request): JsonResponse
     {
         try {
@@ -81,16 +81,16 @@ class PostController extends ApiController
 
             $decodedRequest = json_decode($request->getContent());
             $tempPost = $this->postRepository->findOneBy(["customId"=>$decodedRequest->customId]);
-            if ($decodedRequest->customId && $tempPost->getId()!=$decodedRequest->Id) {
+            if ($decodedRequest->customId && $tempPost->getId()!=$decodedRequest->id) {
                 return $this->respondValidationError("Post with this customId already exists");
             }
 
-            $post = $this->postRepository->find($decodedRequest->Id);
+            $post = $this->postRepository->find($decodedRequest->id);
             $this->updateOrCreatePostFromDecodedRequest($post, $decodedRequest);
             return $this->respondWithSuccess("Post updated successfully");
 
         } catch (\Exception $exception) {
-            return $this->respondWithErrors($exception);
+            return $this->respondValidationError($exception->getMessage());
         }
     }
 
@@ -103,7 +103,6 @@ class PostController extends ApiController
     private function updateOrCreatePostFromDecodedRequest(?Post $post, mixed $decodedRequest): void
     {
         $post->setAuthor($this->getUser());
-        $post->setCreationDate(new \DateTime("now"));
         $post->setCustomId($decodedRequest->customId);
         $post->setDescriptionText($decodedRequest->descriptionText);
         $post->setIsAnonymous($decodedRequest->isAnonymous);
@@ -111,8 +110,6 @@ class PostController extends ApiController
         $post->setIsReachableById($decodedRequest->isReachableById);
         $post->setMainText($decodedRequest->mainText);
         $post->setPublicationDate(new \DateTime($decodedRequest->publicationDate));
-
-        $this->entityManager->persist($post);
         $this->entityManager->flush();
     }
 }

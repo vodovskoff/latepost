@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import {getJWT} from "./JWT";
-export const createPostSlice = (data, errorBox) => {
+export const createOrUpdatePostSlice = (data, errorBox, method) => {
     return axios({
-        method: 'post',
+        method: method,
         url: 'api' + '/post/',
         headers: {
             Authorization: "Bearer " + getJWT()
