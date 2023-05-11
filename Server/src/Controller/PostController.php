@@ -63,23 +63,56 @@ class PostController extends ApiController
             }
 
             $post = new Post();
-            $post->setAuthor($this->getUser());
-
-            $post->setCreationDate(new \DateTime("now"));
-            $post->setCustomId($decodedRequest->customId);
-            $post->setDescriptionText($decodedRequest->descriptionText);
-            $post->setIsAnonymous($decodedRequest->isAnonymous);
-            $post->setIsEncrypted($decodedRequest->isEncrypted);
-            $post->setIsReachableById($decodedRequest->isReachableById);
-            $post->setMainText($decodedRequest->mainText);
-            $post->setPublicationDate(new \DateTime($decodedRequest->publicationDate));
-
-            $this->entityManager->persist($post);
-            $this->entityManager->flush();
+            $this->updateOrCreatePostFromDecodedRequest($post, $decodedRequest);
             return $this->respondWithSuccess("Post added successfully");
 
         } catch (\Exception $exception) {
             return $this->respondWithErrors($exception);
         }
+    }
+
+    #[Route('/', name: 'create_post', methods: ['POST'])]
+    public function update(Request $request): JsonResponse
+    {
+        try {
+            if (!$this->getUser()) {
+                return $this->respondWithErrors("You need to authenticate");
+            }
+
+            $decodedRequest = json_decode($request->getContent());
+            $tempPost = $this->postRepository->findOneBy(["customId"=>$decodedRequest->customId]);
+            if ($decodedRequest->customId && $tempPost->getId()!=$decodedRequest->Id) {
+                return $this->respondValidationError("Post with this customId already exists");
+            }
+
+            $post = $this->postRepository->find($decodedRequest->Id);
+            $this->updateOrCreatePostFromDecodedRequest($post, $decodedRequest);
+            return $this->respondWithSuccess("Post updated successfully");
+
+        } catch (\Exception $exception) {
+            return $this->respondWithErrors($exception);
+        }
+    }
+
+    /**
+     * @param Post|null $post
+     * @param mixed $decodedRequest
+     * @return void
+     * @throws \Exception
+     */
+    private function updateOrCreatePostFromDecodedRequest(?Post $post, mixed $decodedRequest): void
+    {
+        $post->setAuthor($this->getUser());
+        $post->setCreationDate(new \DateTime("now"));
+        $post->setCustomId($decodedRequest->customId);
+        $post->setDescriptionText($decodedRequest->descriptionText);
+        $post->setIsAnonymous($decodedRequest->isAnonymous);
+        $post->setIsEncrypted($decodedRequest->isEncrypted);
+        $post->setIsReachableById($decodedRequest->isReachableById);
+        $post->setMainText($decodedRequest->mainText);
+        $post->setPublicationDate(new \DateTime($decodedRequest->publicationDate));
+
+        $this->entityManager->persist($post);
+        $this->entityManager->flush();
     }
 }

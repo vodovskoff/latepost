@@ -14,7 +14,7 @@ export const createPostSlice = (data, errorBox) => {
             return {data: res.data}
         })
         .catch(err => {
-            if (err.response.data.code===409) {
+            if (err.response.data.status===422) {
                 errorBox.innerText = "Пост с таким ID уже существует"
             }
             return {error: err.response.data}

@@ -13,8 +13,6 @@ export default function MainPage()
             {getJWT() ?
             <>
                 <PostCardArray></PostCardArray>
-                <PostForm></PostForm>
-                <PostCard></PostCard>
             </> :
             <></>}
         </Page>

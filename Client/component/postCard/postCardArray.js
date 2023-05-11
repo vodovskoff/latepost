@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getAllPostsInfo} from "../../store/slices/getAllPostsSlice";
 import {useAppDispatch, useAppSelector} from "../../store/hooks/redux";
 import PostCard from "./postCard";
+import PostForm from "../postForm/postForm";
 
 const isIterable = (obj) => {
     if (obj == null) {
@@ -25,6 +26,6 @@ export default function PostCardArray() {
     if (allPosts.isLoading || !isIterable(allPosts.data)) {
         console.log('load')
     } else {
-        return (allPosts.data.map(post => <PostCard post={post}></PostCard>));
+        return (allPosts.data.map(post => <PostForm post={post}></PostForm>));
     }
 }
