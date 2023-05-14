@@ -61,7 +61,7 @@ export default function PostForm(props) {
     return createOrUpdatePostSlice(data, errorBox, method)
   }
             return(
-            <div id={props.post ? "postForm"+props.post.id : ""} className={ls.wrapper}>
+            <div id={props.post ? "postForm"+props.post.id : ""} className={s.wrapper}>
               <div className={ls.sidebar}>
               <form className={ls.loginForm} action="{{ path('post_create') }}" method="post">
               <div class="form-group row">
@@ -83,15 +83,17 @@ export default function PostForm(props) {
                 </div>
               </div>
               <div class="form-group row">
-                <label for="isEncrypted" class="col-sm-10 col-md-10 col-xl-10 col-form-label">Зашифровать</label>
-                <div class="align-self-center col-sm-2 col-md-2 col-xl-2">
-                  <input type="checkbox" class="form-check-input" id={elementIdByPostId("isEncrypted")} defaultValue={props.post ? props.post.isEncrypted : ""} name="isEncrypted"></input>
-                </div>
+                  <label htmlFor="isEncrypted"
+                         className="col-10">Зашифровать</label>
+                  <div className="align-self-center col-2 col-xl-2">
+                    <input type="checkbox" className="form-check-input" id={elementIdByPostId("isEncrypted")}
+                           defaultChecked={props.post ? props.post.isEncrypted : ""} name="isEncrypted"></input>
+                  </div>
               </div>
               <div class="form-group row">
-                <label for="isAnonymous" class="align-self-center col-sm-10 col-md-10 col-xl-10 col-form-label">Не указывать автора</label>
-                <div class="col-sm-2 col-md-2">
-                  <input type="checkbox" class="form-check-input" id={elementIdByPostId("isAnonymous")} defaultValue={props.post ? props.post.isEncrypted : ""} name="isAnonymous"></input>
+                <label for="isAnonymous" class="align-self-center col-10">Не указывать автора</label>
+                <div class="col-2">
+                  <input type="checkbox" class="form-check-input" id={elementIdByPostId("isAnonymous")} defaultChecked={props.post ? props.post.isAnonymous : ""} name="isAnonymous"></input>
                 </div>
               </div>
               <div class="form-group row">
@@ -103,7 +105,7 @@ export default function PostForm(props) {
               <div class="form-group row">
                 <label for="isReachableById" class="col-sm-2 col-md-10 col-xl-10 col-form-label">Отображать по порядковому номеру</label>
                 <div class="align-self-center col-sm-10 col-md-2 col-xl-2">
-                  <input type="checkbox" class="form-check-input" defaultValue={elementIdByPostId("isReachableById")} id={props.post ? "isReachableById"+props.post.id : "isReachableById"} name="isReachableById"></input>
+                  <input type="checkbox" class="form-check-input" id={elementIdByPostId("isReachableById")} defaultChecked={props.post ? props.post.isReachableById : ""} name="isReachableById"></input>
                   <input type="hidden" id={elementIdByPostId("postId")} value={props.post ? props.post.id : ""}></input>
                 </div>
               </div>

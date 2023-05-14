@@ -3,6 +3,7 @@ import s from './loginForm.module.scss'
 import axios from "axios";
 import {registrationSlice} from '../../store/slices/registrationSlice'
 import {loginSlce, loginSlice} from '../../store/slices/loginSlice'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function LoginForm() {
 
@@ -43,8 +44,18 @@ export default function LoginForm() {
                         <input className={s.loginFormInput} type="text" id="username" name="username"></input>
                             <label htmlFor="password">Пароль:</label>
                         <input className={s.loginFormInput} type="password" id="password" name="password"></input>
-                        <button onClick={onLogin} className={s.loginFormButton} type="button">Войти</button>
-                        <button onClick={onRegistration} className={s.loginFormButton} type="button">Зарегистрироваться</button>
+                        <div class={"row"}>
+                            <div className="mb-1 col-12">
+                                <button onClick={onLogin} className="btn btn-light col-12" type="button">Войти</button>
+                            </div>
+                        </div>
+                        <div className={"row"}>
+                            <div className="mb-1 col-12">
+                                <button onClick={onRegistration} className="btn btn-light col-12"
+                                        type="button">Зарегистрироваться
+                                </button>
+                            </div>
+                        </div>
                     </form>
                     <p id="error_box"></p>
                 </div>
