@@ -4,7 +4,7 @@ import ls from '../loginForm/loginForm.module.scss';
 import {useDispatch, useSelector} from 'react-redux'
 import {getAllPostsInfo} from "../../store/slices/getAllPostsSlice";
 import {useAppDispatch, useAppSelector} from "../../store/hooks/redux";
-import PostCard from "./postCard";
+import PostCard from "../postCard/postCard";
 import PostForm from "../postForm/postForm";
 
 const isIterable = (obj) => {
@@ -21,10 +21,9 @@ export default function PostCardArray() {
 
     useEffect(() => {
         dispatch(getAllPostsInfo())
-        console.log('effect')
     },[])
     if (allPosts.isLoading || !isIterable(allPosts.data)) {
-        console.log('load')
+        console.log('load_all_posts')
     } else {
         return (allPosts.data.map(post => <PostForm post={post}></PostForm>));
     }

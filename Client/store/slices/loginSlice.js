@@ -9,6 +9,7 @@ export const loginSlice = (data, errorBox) => {
     })
         .then(res => {
             localStorage.setItem("token", res.data.token);
+            window.location.reload()
             return {data: res.data}
         })
         .catch(err => {

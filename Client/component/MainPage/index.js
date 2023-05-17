@@ -4,9 +4,9 @@ import LoginForm from '../loginForm/loginForm.js'
 import PostForm from '../postForm/postForm.js'
 import PostCard from "../postCard/postCard";
 import {getJWT} from "../../store/slices/JWT";
-import PostCardArray from "../postCard/postCardArray"
+import PostCardArray from "../postFormArray/postCardArray"
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import SearchPostForm from "../searchPostForm/searchPostForm";
 export default function MainPage()
 {
     return(
@@ -22,7 +22,7 @@ export default function MainPage()
                         <PostCardArray></PostCardArray>
                     </div>
                     <div className="col-xl-3 col-md-3 col-sm-12 col-lg-3">
-                        <LoginForm></LoginForm>
+                        <SearchPostForm></SearchPostForm>
                     </div>
                 </div>
             </> :

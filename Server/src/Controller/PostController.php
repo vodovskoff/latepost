@@ -27,6 +27,7 @@ class PostController extends ApiController
     public function getById(string $postId): JsonResponse
     {
         try {
+            $postId = str_replace(' ', '_', $postId);
             $post_by_id = $this->postRepository->find($postId);
             if ($post_by_id && !$post_by_id->isIsReachableById()) {
                 $post_by_id = NULL;
@@ -58,7 +59,8 @@ class PostController extends ApiController
             }
 
             $decodedRequest = json_decode($request->getContent());
-            if ($decodedRequest->customId && $this->postRepository->findOneBy(["customId"=>$decodedRequest->customId])) {
+            if ($decodedRequest->customId &&
+                ($this->postRepository->findOneBy(["customId"=>$decodedRequest->customId]) || $this->postRepository->find($decodedRequest->customId))) {
                 return $this->respondValidationError("Post with this customId already exists");
             }
 
