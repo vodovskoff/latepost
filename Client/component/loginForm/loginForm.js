@@ -12,7 +12,8 @@ export default function LoginForm() {
     const [password, setPassword] = useState('');
 
     const deleteAllCookies = () => {
-        localStorage.clear();
+        Cookies.remove('JWT');
+        Cookies.remove('refresh_token');
         window.location.reload();
     }
 

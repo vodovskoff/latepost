@@ -12,7 +12,6 @@ export default function PostForm(props) {
 
   const getDataForCreatePost = ()=> {
 
-    let check = "customId"+props.post ? props.post.id : ""
     const customIdInput =  document.getElementById(elementIdByPostId("customId"))
     const mainText = document.getElementById(elementIdByPostId("mainText"))
     const descriptionTextInput = document.getElementById(elementIdByPostId("descriptionText"))

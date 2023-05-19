@@ -65,7 +65,10 @@ class PostController extends ApiController
             }
 
             $post = new Post();
+            $post->setCreationDate(new \DateTime());
             $this->updateOrCreatePostFromDecodedRequest($post, $decodedRequest);
+            $this->entityManager->persist($post);
+            $this->entityManager->flush();
             return $this->respondWithSuccess("Post added successfully");
 
         } catch (\Exception $exception) {
@@ -104,14 +107,15 @@ class PostController extends ApiController
      */
     private function updateOrCreatePostFromDecodedRequest(?Post $post, mixed $decodedRequest): void
     {
-        $post->setAuthor($this->getUser());
-        $post->setCustomId($decodedRequest->customId);
-        $post->setDescriptionText($decodedRequest->descriptionText);
-        $post->setIsAnonymous($decodedRequest->isAnonymous);
-        $post->setIsEncrypted($decodedRequest->isEncrypted);
-        $post->setIsReachableById($decodedRequest->isReachableById);
-        $post->setMainText($decodedRequest->mainText);
-        $post->setPublicationDate(new \DateTime($decodedRequest->publicationDate));
+        $post->setAuthor($this->getUser())
+            ->setCustomId($decodedRequest->customId)
+            ->setDescriptionText($decodedRequest->descriptionText)
+            ->setIsAnonymous($decodedRequest->isAnonymous)
+            ->setIsEncrypted($decodedRequest->isEncrypted)
+            ->setIsReachableById($decodedRequest->isReachableById)
+            ->setMainText($decodedRequest->mainText)
+            ->setPublicationDate(new \DateTime($decodedRequest->publicationDate));
+        $this->entityManager->persist($post);
         $this->entityManager->flush();
     }
 }

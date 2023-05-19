@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 import axios from "axios";
 
 export const loginSlice = (data, errorBox) => {
@@ -8,7 +9,8 @@ export const loginSlice = (data, errorBox) => {
         data: data
     })
         .then(res => {
-            localStorage.setItem("token", res.data.token);
+            Cookies.set('JWT', res.data.token, { expires: 7 })
+            Cookies.set('refresh_token', res.data.refresh_token, { expires: 7 })
             window.location.reload()
             return {data: res.data}
         })

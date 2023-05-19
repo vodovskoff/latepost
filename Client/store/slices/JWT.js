@@ -1,5 +1,6 @@
+import Cookies from "js-cookie";
 export function getJWT() {
-    return localStorage.getItem('token')
+    return Cookies.get('JWT');
 }
 
 export function parseJwt (token) {
